@@ -13,7 +13,7 @@ OR
 go build src/cli/game.go
 ```
 
-To run
+To run game,
 
 ```
 make run
@@ -21,6 +21,12 @@ OR
 ./game   // after building
 ```
 
+To run tests
+```
+make test
+OR
+go test ./... -v
+```
 
 ## Usage
 

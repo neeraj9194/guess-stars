@@ -3,3 +3,6 @@ build:
 
 run:
 	go run src/cli/game.go
+
+test:
+	go test ./... -v
