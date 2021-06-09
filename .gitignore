@@ -15,3 +15,4 @@
 # vendor/
 .vscode
 src/cli/__debug_bin
+game

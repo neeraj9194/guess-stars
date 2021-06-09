@@ -10,7 +10,7 @@ import (
 
 type RepoList struct {
 	TotalCount        int    `json:"total_count"`
-	IncompleteResults int    `json:"incomplete_results"`
+	IncompleteResults bool   `json:"incomplete_results"`
 	Repos             []Repo `json:"items"`
 }
 

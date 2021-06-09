@@ -14,6 +14,10 @@ func main() {
 	winResult := 0
 
 	listProjects := fetchRepo.GetRepositoryList(lang)
+	if listProjects == nil {
+		fmt.Println("Could not fetch repositories from Github.")
+	}
+	
 	listProjects = RandomTrendingList(5, listProjects)
 
 	fmt.Println("---------Lets Start------------")
