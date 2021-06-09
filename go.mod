@@ -1,5 +1,7 @@
-module githib.com/neeraj9194/guess-stars
+module github.com/neeraj9194/guess-stars
 
 go 1.16
 
-require github.com/andygrunwald/go-trending v0.0.0-20210208175651-66a7342ecf6b
+replace github.com/neeraj9194/guess-stars/src/api => ./src/api
+
+require github.com/neeraj9194/guess-stars/src/api v0.0.0-00010101000000-000000000000
