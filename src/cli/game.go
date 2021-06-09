@@ -3,7 +3,9 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"sort"
 	"time"
+	"log"
 
 	fetchRepo "github.com/neeraj9194/guess-stars/src/api"
 )
@@ -15,7 +17,7 @@ func main() {
 
 	listProjects := fetchRepo.GetRepositoryList(lang)
 	if listProjects == nil {
-		fmt.Println("Could not fetch repositories from Github.")
+		log.Fatal("Could not fetch repositories from Github.")
 	}
 	
 	listProjects = RandomTrendingList(5, listProjects)
@@ -34,12 +36,23 @@ func main() {
 			fmt.Println("Please enter a valid integer.")
 			return
 		}
-		tolerancePer := ((guessStars - pr.Stars) * 100) / pr.Stars
-		if tolerancePer >= -10 && tolerancePer <= 10 {
-			fmt.Println("You are correct!")
-			winResult++
+		var tolerancePer int
+		if pr.Stars == 0 {
+			// Div by 0
+			if guessStars == 0 {
+				fmt.Println("You are correct!")
+				winResult++
+			} else {
+				fmt.Println("Wrong!")
+			}
 		} else {
-			fmt.Println("Wrong!")
+			tolerancePer = ((guessStars - pr.Stars) * 100) / pr.Stars
+			if tolerancePer >= -10 && tolerancePer <= 10 {
+				fmt.Println("You are correct!")
+				winResult++
+			} else {
+				fmt.Println("Wrong!")
+			}
 		}
 	}
 
@@ -90,7 +103,14 @@ func ElementExist(slice []int, val int) bool {
 
 func languageSelection() string {
 	langList := fetchRepo.LanguageList()
-	for i, item := range langList {
+
+	keys := make([]string, 0, len(langList))
+	for k := range langList {
+		keys = append(keys, k)
+	}
+
+	sort.Strings(keys)
+	for i, item := range keys {
 		fmt.Printf("%d: %v\n", i+1, item)
 	}
 
@@ -101,8 +121,8 @@ func languageSelection() string {
 		fmt.Println("Please enter a valid integer.")
 		return ""
 	}
-	if language == 0 {
+	if language == 0 || language > len(keys) {
 		return ""
 	}
-	return langList[language-1]
+	return langList[keys[language-1]]
 }

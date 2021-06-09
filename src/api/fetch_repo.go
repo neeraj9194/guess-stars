@@ -46,6 +46,7 @@ func GetRepositoryList(language string) []Repo {
 
 	client := &http.Client{}
 	searchURL := generateURL(language)
+	fmt.Printf("%v\n", searchURL)
 
 	req, err := http.NewRequest("GET", searchURL, nil)
 	if err != nil {
@@ -71,23 +72,22 @@ func GetRepositoryList(language string) []Repo {
 	return responseObject.Repos
 }
 
-func LanguageList() []string {
-	languages := []string{
-		"C++",
-		"HTML",
-		"Java",
-		"JavaScript",
-		"PHP",
-		"Python",
-		"Ruby",
-		"C",
-		"C#",
-		"Dockerfile",
-		"Go",
-		"Swift",
-		"TypeScript",
-		"Visual Basic .NET",
-		"YAML",
+func LanguageList() map[string]string {
+	return map[string]string{
+		"C++":               "cpp",
+		"HTML":              "HTML",
+		"Java":              "Java",
+		"JavaScript":        "JavaScript",
+		"PHP":               "PHP",
+		"Python":            "Python",
+		"Ruby":              "Ruby",
+		"C":                 "C",
+		"C#":                "Csharp",
+		"Dockerfile":        "Dockerfile",
+		"Go":                "Go",
+		"Swift":             "Swift",
+		"TypeScript":        "TypeScript",
+		"Visual Basic .NET": "Visual+Basic+.NET",
+		"YAML":              "YAML",
 	}
-	return languages
 }
