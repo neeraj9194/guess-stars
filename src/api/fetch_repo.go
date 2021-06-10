@@ -46,7 +46,6 @@ func GetRepositoryList(language string) []Repo {
 
 	client := &http.Client{}
 	searchURL := generateURL(language)
-	fmt.Printf("%v\n", searchURL)
 
 	req, err := http.NewRequest("GET", searchURL, nil)
 	if err != nil {
